@@ -48,7 +48,7 @@ Using the connected Chromium-based browser:
 
 ## Still required before submission
 
-- Narasimha has not tested the app or supplied feedback. Confirm the actual revision problem and collect an honest trial.
+- The intended recipient's actual problem was confirmed via Bharani on October 2: he finds it difficult to revise topics he has already studied. He has not tested the app or supplied product feedback; an honest trial would still be useful. His name is omitted for privacy.
 - Source was published to `kudala-bharani/note-sprout` on October 2, 2026; GitHub was checked for the tested recall-card commit `eeb012e`.
 - Demo video/deployment, final user review, and DEV submission remain incomplete; passing tests and publishing source are not a contest submission.
 - The handwritten sample demonstrates the interface; it is never presented as proof of AI inference.

@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "A local, note-grounded study quiz for Narasimha's computer-science revision.",
+  "description": "Local-first recall cards for a friend's computer-science revision.",
   "engines": { "node": ">=22" },
   "scripts": {
     "start": "node server.mjs",

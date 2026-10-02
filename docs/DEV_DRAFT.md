@@ -10,9 +10,11 @@ This is a planned submission for the [Hacktoberfest Weekend Challenge: Build for
 
 ## What I Built
 
-NoteSprout is a small recall-card tool intended for my friend Narasimha, who studies computer science. It gives him three prompts from his notes. He can write a response, reveal the original passage, and decide whether he got it or wants another look. The app does not grade him.
+My friend studies computer science. When I asked what he finds difficult, he said revising topics he has already studied. I'm keeping his name private.
 
-[Before publishing, describe in your own words the specific revision difficulty Narasimha confirmed. We have not yet asked him for feedback or measured whether it helps.]
+I built NoteSprout around that problem. He can paste a short section of his notes and get three recall prompts. For each one, he thinks through an answer, reveals the original passage, and marks it **Got it** or **Practice again**. At the end, he can revisit just the cards he marked for more practice. The idea is to make revisiting a topic a small session rather than another long read-through.
+
+The app does not grade him. He has not tried it yet, so I can describe the problem he reported and the flow I built, but not claim it has improved his revision.
 
 ## Demo
 
@@ -37,7 +39,3 @@ The first version was a multiple-choice quiz. Live testing exposed an ambiguous 
 The model can run on the student's own machine. Revision notes don't have to be sent to a hosted AI provider, and there is no per-request API bill. The tradeoff is a model download and local compute cost. Open weights also make it possible to change the model later.
 
 Original excerpts make prompts easier to inspect, not automatically correct. This is a revision aid, not an examiner.
-
-## What Narasimha Thought
-
-[Optional: include only actual feedback, with permission. Remove this section if he hasn't tested it.]

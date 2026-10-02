@@ -1,8 +1,8 @@
 # NoteSprout
 
-A small study corner for Narasimha, a friend studying computer science. Paste revision notes, recall an idea, reveal the original passage, and decide what needs another look.
+A small study corner built for a friend studying computer science. Paste revision notes, recall an idea, reveal the original passage, and decide what needs another look.
 
-Built from scratch starting October 2, 2026, for the Hacktoberfest Weekend Challenge: **Build for a Friend**. The intended recipient and subject were supplied by Bharani. Recipient testing and feedback have not yet happened; no endorsement or learning outcomes are claimed.
+Built from scratch starting October 2, 2026, for the Hacktoberfest Weekend Challenge: **Build for a Friend**. The friend this was built for finds it difficult to revise topics he has already studied. NoteSprout is intended to give him a small, repeatable way to revisit those topics using his own notes. He has not yet tested the app; no endorsement or learning outcomes are claimed.
 
 ## Run locally
 
@@ -62,9 +62,9 @@ The unit and HTTP tests use controlled model responses. They do not substitute f
 
 - [Ollama](https://github.com/ollama/ollama): local model runtime, under its own license.
 - [Qwen3](https://github.com/QwenLM/Qwen3) / [the 4B Ollama model](https://ollama.com/library/qwen3:4b): open-weight model, Apache-2.0. Model files are not included in this repository.
-- Original application code and sample study material were developed with **OpenAI Codex assistance**. Bharani supplied the project direction and intended recipient. Do not describe this as unaided work or as tested by Narasimha until he has tried it.
+- Original application code and sample study material were developed with **OpenAI Codex assistance**. Bharani supplied the project direction and intended recipient. Do not describe this as unaided work or as tested by the intended recipient until he has tried it.
 - The code is MIT-licensed; external runtime/model licenses remain separate.
 
 ## Challenge status
 
-This is a local project, **not yet a submitted contest entry**. Before submission: have Narasimha try it, review the implementation and write-up, provide an honest deployed/video demo and code link, confirm eligibility and rules, and disclose AI assistance on DEV. See [the draft](docs/DEV_DRAFT.md). The entry deadline is October 5, 2026 at 2:59 AM EDT. Any commits after the deadline must be identified here if the project is submitted.
+This is a local project, **not yet a submitted contest entry**. Before submission: invite the intended recipient to try it, review the implementation and write-up, provide an honest deployed/video demo and code link, confirm eligibility and rules, and disclose AI assistance on DEV. See [the draft](docs/DEV_DRAFT.md). The entry deadline is October 5, 2026 at 2:59 AM EDT. Any commits after the deadline must be identified here if the project is submitted.
