@@ -9,22 +9,11 @@ const quiz = {
   title: 'Study check',
   questions: ['What ordering does a stack follow?', 'What ordering does a queue follow?', 'What data does binary search need?'].map((question, index) => ({
     question,
-    options: ['Last-in, first-out', 'First-in, first-out', 'Sorted data', 'Random data'],
-    answerIndex: index,
-    explanation: 'The answer is stated in the notes.',
     evidence: splitSourcePassages(notes)[index],
   })),
 };
-const modelQuiz = {
-  title: quiz.title,
-  questions: quiz.questions.map(({ question, options, answerIndex, explanation, evidence }) => ({
-    question, correctAnswer: options[answerIndex],
-    distractors: options.filter((_, index) => index !== answerIndex),
-    explanation, evidence,
-  })),
-};
 
-async function launch(t, fetchImpl = async (url) => url.endsWith('/api/tags') ? Response.json({ models: [{ name: DEFAULT_MODEL }] }) : Response.json({ response: JSON.stringify(modelQuiz) })) {
+async function launch(t, fetchImpl = async (url) => url.endsWith('/api/tags') ? Response.json({ models: [{ name: DEFAULT_MODEL }] }) : Response.json({ response: JSON.stringify(quiz) })) {
   const server = await startServer({ port: 0, fetchImpl });
   t.after(() => { server.closeAllConnections(); return new Promise((done) => server.close(done)); });
   return { server, url: `http://127.0.0.1:${server.address().port}` };
@@ -57,16 +46,8 @@ test('status and generation API return their documented shapes', async (t) => {
   const response = await post(url);
   assert.equal(response.status, 200);
   const body = await response.json();
-  assert.equal(body.title, quiz.title);
-  assert.equal(body.model, DEFAULT_MODEL);
-  assert.equal(body.questions.length, 3);
-  for (let index = 0; index < body.questions.length; index++) {
-    const question = body.questions[index];
-    assert.equal(question.question, quiz.questions[index].question);
-    assert.equal(question.options[question.answerIndex], modelQuiz.questions[index].correctAnswer);
-    assert.equal(question.evidence, quiz.questions[index].evidence);
-    assert.deepEqual([...question.options].sort(), [...quiz.questions[index].options].sort());
-  }
+  assert.deepEqual(body, { ...quiz, model: DEFAULT_MODEL });
+  assert.ok(body.questions.every((question) => Object.keys(question).sort().join(',') === 'evidence,question'));
   assert.equal(response.headers.get('access-control-allow-origin'), null);
   assert.equal(response.headers.get('x-content-type-options'), 'nosniff');
   assert.match(response.headers.get('content-security-policy'), /connect-src 'self'/);
@@ -76,7 +57,7 @@ test('status and generation API return their documented shapes', async (t) => {
 test('invalid input is rejected before the model is called', async (t) => {
   let calls = 0;
   const { server, url } = await launch(t, async () => { calls++; throw new Error('unexpected call'); });
-  for (const body of [{ notes: 'short', count: 3 }, { notes, count: 2 }, { notes: 'x'.repeat(8001), count: 3 }]) {
+  for (const body of [{ notes: 'short', count: 3 }, { notes, count: 2 }, { notes, count: 5 }, { notes: 'x'.repeat(8001), count: 3 }]) {
     assert.equal((await post(url, body)).status, 400);
   }
   assert.equal((await post(url, { notes, count: 3 }, { 'Content-Type': 'text/plain' })).status, 415);
@@ -129,7 +110,7 @@ test('only one generation runs at a time and a completed request releases the lo
   const { url } = await launch(t, async () => {
     calls++;
     if (calls === 1) { entered(); await blocked; }
-    return Response.json({ response: JSON.stringify(modelQuiz) });
+    return Response.json({ response: JSON.stringify(quiz) });
   });
   const first = post(url);
   await started;
@@ -146,7 +127,7 @@ test('a disconnected browser cancels inference and releases the generation lock'
   const aborted = new Promise((resolveAborted) => { cancelled = resolveAborted; });
   let first = true;
   const { server, url } = await launch(t, async (_url, { signal }) => {
-    if (!first) return Response.json({ response: JSON.stringify(modelQuiz) });
+    if (!first) return Response.json({ response: JSON.stringify(quiz) });
     first = false;
     entered();
     return new Promise((_, reject) => {

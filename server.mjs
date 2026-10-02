@@ -103,7 +103,7 @@ export function createApp({ fetchImpl, model = DEFAULT_MODEL, timeoutMs, staticD
       if (pathname === '/api/quiz') {
         if (req.method !== 'POST') {
           res.setHeader('Allow', 'POST');
-          throw new QuizError('Use POST to create a quiz.', 405);
+          throw new QuizError('Use POST to create recall cards.', 405);
         }
         if (req.headers['content-type']?.split(';')[0].trim().toLowerCase() !== 'application/json') {
           throw new QuizError('Send your notes as application/json.', 415);
@@ -113,7 +113,7 @@ export function createApp({ fetchImpl, model = DEFAULT_MODEL, timeoutMs, staticD
           throw new QuizError('That request is too large. Keep notes to 8,000 characters or fewer.', 413);
         }
         const input = validateInput(await readBody(req));
-        if (generating) throw new QuizError('A quiz is already being created. Wait a moment, then try again.', 429);
+        if (generating) throw new QuizError('Recall cards are already being created. Wait a moment, then try again.', 429);
         generating = true;
         const controller = new AbortController();
         const onDisconnect = () => {

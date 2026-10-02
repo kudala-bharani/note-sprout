@@ -2,15 +2,29 @@
 
 Checked locally on October 2, 2026. Automated checks, real inference, and recipient feedback are separate claims.
 
-## Automated checks
+## Current recall-card version: automated checks
 
 - Node.js 22.23.3: all 22 unit/HTTP tests passed, with no failures or skips.
 - `npm run check`: JavaScript syntax checks passed for server, model client, browser modules, and runtime launcher.
 - `git diff --check`: passed.
-- Tests cover note limits, exact source passages, answer shuffling, malformed/duplicate output, insufficient-note refusal, timeouts, cancellation, single-generation locking, fixed static routes, and same-origin/loopback restrictions.
+- Tests cover note limits, exactly three recall cards, exact source passages, rejection of generated answers/grades, malformed/duplicate output, insufficient-note refusal, timeouts, cancellation, single-generation locking, fixed static routes, and same-origin/loopback restrictions.
 - These tests use controlled model responses. They do not measure model accuracy.
 
-## Real local model
+## Current recall-card version: real local model and browser
+
+- Two sets of three cards were generated through the browser with the real Qwen3 4B model: the included data-structures notes and a separate short operating-systems passage.
+- The six source excerpts matched the notes. Prompts covered stack ordering, enqueue/dequeue, binary-search complexity, a process definition, process address space, and a mutex lock. The stack prompt's wording ("order of operations") is broad; the original passage is still necessary context. No general model-accuracy claim is made.
+- Optional written recall, source reveal, both self-ratings, a 2/3 **self-marked** confidence summary, and retrying the single practice card were exercised.
+- Notes were read-only during generation. Canceling retained the notes and a subsequent generation completed.
+- Markdown exports were downloaded and inspected. They contain the model label, prompts, and original source passages, not model-generated answer keys. Written recall text was excluded.
+- Page reload cleared in-memory notes/cards. Desktop and a 375-pixel viewport were inspected; no horizontal overflow was observed. The temporary viewport override was reset.
+- No app warnings/errors appeared in the inspected browser console.
+- Clear's confirmation now explicitly says that previously exported files are unchanged; clearing a tab cannot erase a download.
+- No physical-phone test, screen-reader audit, recipient trial, or cross-browser matrix has been performed.
+
+## Historical multiple-choice prototype (superseded)
+
+The following failures led to removing generated answers, choices, and automated grading. They describe the earlier prototype, not features of the current recall-card version.
 
 - Official Ollama 0.35.1, bound to loopback with cloud features disabled.
 - Qwen3 4B, Q4_K_M, `think: false`, running on an 8 GB Apple-silicon Mac.
@@ -21,7 +35,7 @@ Checked locally on October 2, 2026. Automated checks, real inference, and recipi
 - Qwen2.5 1.5B was tried first and rejected as the default after live tests exposed paraphrased evidence, duplicate choices, and wrong numerical answer indices. The app rejected malformed quizzes rather than substituting the handwritten demo. The revised implementation selects evidence from actual passages and computes answer indices itself.
 - This small test is not a general accuracy evaluation. The model can still make factual or pedagogical mistakes; source quotation does not prove correctness.
 
-## Browser checks
+## Historical multiple-choice browser checks
 
 Using the connected Chromium-based browser:
 
@@ -35,7 +49,7 @@ Using the connected Chromium-based browser:
 ## Still required before submission
 
 - Narasimha has not tested the app or supplied feedback. Confirm the actual revision problem and collect an honest trial.
-- User review, public repository, demo video/deployment, and DEV submission are not complete.
+- Public source publication, demo video/deployment, final user review, and DEV submission must be completed separately; passing tests is not a contest submission.
 - The handwritten sample demonstrates the interface; it is never presented as proof of AI inference.
 
 ## Environment note

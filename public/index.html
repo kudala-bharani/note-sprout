@@ -25,7 +25,7 @@
         <section class="intro" aria-labelledby="page-title">
           <p class="eyebrow"><span aria-hidden="true"></span>A study corner for Narasimha</p>
           <h1 id="page-title">Turn your notes into<br />a little more <em>confidence.</em></h1>
-          <p class="intro-copy">Bring a few ideas. Test what’s taking root.<br class="mobile-break" /> Learn a little more with every answer.</p>
+          <p class="intro-copy">Bring a few ideas. Recall what’s taking root.<br class="mobile-break" /> Check your memory against your own notes.</p>
           <div class="intro-aside" aria-hidden="true"><span class="hand-drawn-arrow">↙</span><span>Small steps.<br />Stronger roots.</span></div>
         </section>
 
@@ -41,21 +41,21 @@
               <textarea id="notes" name="notes" maxlength="8000" spellcheck="false" aria-describedby="notes-hint note-count" placeholder="Paste your notes here…&#10;&#10;A concept you’re learning. A definition worth remembering. That one thing from the lecture that almost clicked."></textarea>
               <div class="notes-meta"><span id="note-count">0 / 8,000 characters</span><button type="button" class="text-button clear-button" id="clear-notes" disabled>Clear</button></div>
               <p id="notes-hint" class="field-hint">A paragraph or two is a great place to start. Minimum 80 characters.</p>
-              <div class="generate-controls"><div class="question-count"><label for="count">Questions</label><select id="count" name="count"><option value="3" selected>3 questions</option><option value="5">5 questions</option></select></div><button class="button button-primary" id="generate" type="submit">Generate quiz <span aria-hidden="true">↗</span></button></div>
+              <div class="generate-controls"><div class="study-card-count"><span>One small session</span><strong>3 study cards</strong></div><button class="button button-primary" id="generate" type="submit">Create study cards <span aria-hidden="true">↗</span></button></div>
               <p id="form-message" class="form-message" role="status" aria-live="polite" hidden></p>
               <p class="local-note"><span aria-hidden="true">⌁</span> Processed on your computer. Never saved by NoteSprout.</p>
             </form>
           </section>
 
           <section class="panel quiz-panel" aria-labelledby="quiz-title" aria-busy="false">
-            <div class="panel-heading quiz-heading"><div><p class="section-kicker"><span>02</span> YOUR PRACTICE</p><h2 id="quiz-title">Make it stick.</h2></div><button type="button" class="text-button export-button" id="export-quiz" hidden aria-label="Download quiz and answers as Markdown">Export <span aria-hidden="true">↓</span></button></div>
+            <div class="panel-heading quiz-heading"><div><p class="section-kicker"><span>02</span> YOUR PRACTICE</p><h2 id="quiz-title">Make it stick.</h2></div><button type="button" class="text-button export-button" id="export-quiz" hidden aria-label="Download study prompts and original passages as Markdown">Export <span aria-hidden="true">↓</span></button></div>
             <div id="quiz-content"></div>
           </section>
         </div>
 
         <section class="model-section" aria-label="Local AI connection">
           <div class="model-status-line"><div class="model-status"><span id="model-dot" class="status-dot" aria-hidden="true"></span><span id="model-status" role="status">Checking your local model…</span></div><button type="button" class="text-button" id="check-model">Check connection <span aria-hidden="true">↻</span></button></div>
-          <details id="model-setup"><summary>Local model setup</summary><div class="setup-content"><p id="model-message">NoteSprout uses Ollama on this computer. No account or API key needed.</p><p>From the NoteSprout project folder, run <code>npm run ai</code> in a terminal. In another terminal, run <code>npm run model:pull</code>. Then check the connection above. On a new computer, install Ollama first; see the README.</p><p class="setup-note">The first model download needs internet; generating quizzes stays on this computer. You can try the handwritten sample while you set up.</p></div></details>
+          <details id="model-setup"><summary>Local model setup</summary><div class="setup-content"><p id="model-message">NoteSprout uses Ollama on this computer. No account or API key needed.</p><p>From the NoteSprout project folder, run <code>npm run ai</code> in a terminal. In another terminal, run <code>npm run model:pull</code>. Then check the connection above. On a new computer, install Ollama first; see the README.</p><p class="setup-note">The first model download needs internet; creating study cards stays on this computer. You can try the handwritten sample while you set up.</p></div></details>
         </section>
       </main>
 
@@ -77,6 +77,6 @@
       </svg>
     </template>
     <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
-    <noscript><p class="noscript-message">NoteSprout needs JavaScript to generate and practice quizzes. Your notes stay on this computer.</p></noscript>
+    <noscript><p class="noscript-message">NoteSprout needs JavaScript to create and practice study cards. Your notes stay on this computer.</p></noscript>
   </body>
 </html>

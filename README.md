@@ -1,6 +1,6 @@
 # NoteSprout
 
-A small study corner for Narasimha, a friend studying computer science. Paste revision notes, make a short quiz, and check each explanation against an excerpt from those notes.
+A small study corner for Narasimha, a friend studying computer science. Paste revision notes, recall an idea, reveal the original passage, and decide what needs another look.
 
 Built from scratch starting October 2, 2026, for the Hacktoberfest Weekend Challenge: **Build for a Friend**. The intended recipient and subject were supplied by Bharani. Recipient testing and feedback have not yet happened; no endorsement or learning outcomes are claimed.
 
@@ -9,6 +9,8 @@ Built from scratch starting October 2, 2026, for the Hacktoberfest Weekend Chall
 You need Node.js 22+ and [Ollama](https://ollama.com/download). In a terminal:
 
 ```sh
+git clone https://github.com/kudala-bharani/note-sprout.git
+cd note-sprout
 npm run ai
 ```
 
@@ -19,29 +21,31 @@ npm run model:pull
 npm start
 ```
 
-Open **http://127.0.0.1:4173**. There are no npm dependencies to install. The default model download is approximately 2.5 GB; allow additional memory for inference. Once the runtime and model are installed, quiz generation uses the local machine and needs no hosted API key.
+Open **http://127.0.0.1:4173**. There are no npm dependencies to install. The default model download is approximately 2.5 GB; allow additional memory for inference. Once the runtime and model are installed, card generation uses the local machine and needs no hosted API key.
 
 The launcher uses a project-local `.runtime/ollama/ollama` binary if present, otherwise the installed `ollama` command. The development machine's downloaded runtime and models are gitignored and are not distributed with the code. The helper starts Ollama with cloud features disabled and a loopback-only address.
 
-If Ollama isn't available yet, **Try a sample quiz** demonstrates the interaction with a clearly labeled, handwritten example. This is not AI generation and isn't used as a fallback when generation fails.
+If Ollama isn't available yet, **Try sample study cards** demonstrates the interaction with a clearly labeled, handwritten example. This is not AI generation and isn't used as a fallback when generation fails.
 
 ## What it does
 
-- Turns a bounded set of pasted notes into three or five multiple-choice questions.
-- Reveals the answer, an explanation, and a supporting quotation after an attempt.
-- Checks model output structure and verifies that each evidence excerpt occurs in the submitted notes.
-- Keeps notes and quiz answers in memory, with no accounts, analytics, browser persistence, or server-side note files.
-- Lets the student download their quiz for revision.
+- Turns a bounded set of pasted notes into three short recall prompts.
+- Allows an optional written response, kept only in the browser tab and never sent to the model.
+- Reveals an exact original passage, then asks the student to select **Got it** or **Practice again**.
+- Shows self-marked confidence, not a test score, and allows another pass over practice cards.
+- Rejects malformed output, invented quotations, and model-written answer or grading fields.
+- Keeps notes and responses in memory, with no accounts, analytics, browser persistence, or server-side note files.
+- Exports prompts and original passages as Markdown, without the student's written responses.
 
-An exact quotation is **not a proof that an answer is correct**. The model can misunderstand a passage or write a poor question. Check the explanations against your course material; don't use this as an authoritative marking tool.
+An exact quotation is **not a proof that a question is well written**. The model can still misunderstand a passage or ask about something the passage doesn't support. Check prompts and notes against your course material. The app neither grades responses nor generates an answer key.
 
-**Prototype limitation:** live testing found ambiguous answer choices even with the stronger model. Generated quizzes need human review; the included handwritten sample is more predictable. See the verification record for failures as well as successful checks.
+**Why self-check cards?** An earlier multiple-choice prototype produced ambiguous options and a misleading answer. Those live tests led to removing generated answers and automated grading entirely. See the verification record for the history and current checks.
 
-Start with three questions on a low-memory computer. Five questions can hit the 90-second generation deadline; if that happens, choose three or shorten the notes. There is no silent sample fallback.
+Each session has three cards. Generation has a 90-second deadline; shorten your notes if your machine times out. There is no silent sample fallback.
 
 ## Why open weights?
 
-The actual quiz is produced by **Qwen3 4B through Ollama**, with thinking disabled, not by a hosted proprietary API or a fixed question list. Its Apache-2.0 model weights can run locally. This lets a student keep private revision notes on their machine and change the local model without an API subscription. Local inference still uses disk space, memory, time, and electricity.
+The actual recall prompts are produced by **Qwen3 4B through Ollama**, with thinking disabled, not by a hosted proprietary API or a fixed question list. Its Apache-2.0 model weights can run locally. This lets a student keep private revision notes on their machine and change the local model without an API subscription. Local inference still uses disk space, memory, time, and electricity.
 
 The app talks only to Ollama on the loopback interface. It doesn't pull models automatically. Keep Ollama local and use a local model, not a cloud model. This prototype isn't designed for public hosting: don't expose its port or Ollama's port to the internet.
 
