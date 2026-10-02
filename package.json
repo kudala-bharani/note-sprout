@@ -1,0 +1,16 @@
+{
+  "name": "note-sprout",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "A local, note-grounded study quiz for Narasimha's computer-science revision.",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "start": "node server.mjs",
+    "ai": "node scripts/local-ai.mjs serve",
+    "model:pull": "node scripts/local-ai.mjs pull qwen3:4b",
+    "test": "node --test tests/*.test.mjs",
+    "check": "node --check server.mjs && node --check lib/quiz.mjs && node --check public/app.js && node --check public/demo.js && node --check scripts/local-ai.mjs"
+  },
+  "license": "MIT"
+}

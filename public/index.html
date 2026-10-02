@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f7f6ee" />
+    <meta name="description" content="A quiet, private place to turn your study notes into a little more confidence. Powered by a local AI model." />
+    <title>NoteSprout — a little practice, a little progress</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/style.css" />
+    <script type="module" src="/app.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#notes">Skip to your notes</a>
+    <div class="site-shell">
+      <header class="site-header">
+        <a class="brand" href="/" aria-label="NoteSprout home">
+          <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M16 26V15M16 20C8 20 5 15 5 8c8 0 11 5 11 12ZM16 15C16 8 20 4 27 4c0 7-4 11-11 11Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg></span>
+          <span>NoteSprout<span class="brand-period">.</span></span>
+        </a>
+        <span class="privacy-tag"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5.5 8V6a4.5 4.5 0 0 1 9 0v2M4 8h12v9H4zM10 11v3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Just you &amp; your notes</span>
+      </header>
+
+      <main>
+        <section class="intro" aria-labelledby="page-title">
+          <p class="eyebrow"><span aria-hidden="true"></span>A study corner for Narasimha</p>
+          <h1 id="page-title">Turn your notes into<br />a little more <em>confidence.</em></h1>
+          <p class="intro-copy">Bring a few ideas. Test what’s taking root.<br class="mobile-break" /> Learn a little more with every answer.</p>
+          <div class="intro-aside" aria-hidden="true"><span class="hand-drawn-arrow">↙</span><span>Small steps.<br />Stronger roots.</span></div>
+        </section>
+
+        <div class="workspace">
+          <section class="panel notes-panel" aria-labelledby="notes-title">
+            <div class="panel-heading">
+              <p class="section-kicker"><span>01</span> YOUR NOTES</p>
+              <h2 id="notes-title">Start with what you know.</h2>
+              <p>Lecture notes, definitions, the tricky bits. All welcome.</p>
+            </div>
+            <form id="notes-form" novalidate>
+              <div class="notes-tools"><label for="notes">Your study notes</label><button type="button" class="text-button" id="load-sample">Load CS sample <span aria-hidden="true">↗</span></button></div>
+              <textarea id="notes" name="notes" maxlength="8000" spellcheck="false" aria-describedby="notes-hint note-count" placeholder="Paste your notes here…&#10;&#10;A concept you’re learning. A definition worth remembering. That one thing from the lecture that almost clicked."></textarea>
+              <div class="notes-meta"><span id="note-count">0 / 8,000 characters</span><button type="button" class="text-button clear-button" id="clear-notes" disabled>Clear</button></div>
+              <p id="notes-hint" class="field-hint">A paragraph or two is a great place to start. Minimum 80 characters.</p>
+              <div class="generate-controls"><div class="question-count"><label for="count">Questions</label><select id="count" name="count"><option value="3" selected>3 questions</option><option value="5">5 questions</option></select></div><button class="button button-primary" id="generate" type="submit">Generate quiz <span aria-hidden="true">↗</span></button></div>
+              <p id="form-message" class="form-message" role="status" aria-live="polite" hidden></p>
+              <p class="local-note"><span aria-hidden="true">⌁</span> Processed on your computer. Never saved by NoteSprout.</p>
+            </form>
+          </section>
+
+          <section class="panel quiz-panel" aria-labelledby="quiz-title" aria-busy="false">
+            <div class="panel-heading quiz-heading"><div><p class="section-kicker"><span>02</span> YOUR PRACTICE</p><h2 id="quiz-title">Make it stick.</h2></div><button type="button" class="text-button export-button" id="export-quiz" hidden aria-label="Download quiz and answers as Markdown">Export <span aria-hidden="true">↓</span></button></div>
+            <div id="quiz-content"></div>
+          </section>
+        </div>
+
+        <section class="model-section" aria-label="Local AI connection">
+          <div class="model-status-line"><div class="model-status"><span id="model-dot" class="status-dot" aria-hidden="true"></span><span id="model-status" role="status">Checking your local model…</span></div><button type="button" class="text-button" id="check-model">Check connection <span aria-hidden="true">↻</span></button></div>
+          <details id="model-setup"><summary>Local model setup</summary><div class="setup-content"><p id="model-message">NoteSprout uses Ollama on this computer. No account or API key needed.</p><p>From the NoteSprout project folder, run <code>npm run ai</code> in a terminal. In another terminal, run <code>npm run model:pull</code>. Then check the connection above. On a new computer, install Ollama first; see the README.</p><p class="setup-note">The first model download needs internet; generating quizzes stays on this computer. You can try the handwritten sample while you set up.</p></div></details>
+        </section>
+      </main>
+
+      <footer class="site-footer"><span>A little practice. A little progress.</span><span>No accounts. No trackers. No saved notes.</span></footer>
+    </div>
+    <template id="notebook-art">
+      <svg class="notebook-illustration" viewBox="0 0 190 150" fill="none" aria-hidden="true">
+        <path d="M37 41 151 31l8 102-116 8Z" fill="#eef0e2" stroke="#d9dfcb" />
+        <rect x="32" y="26" width="118" height="103" rx="4" transform="rotate(-5 32 26)" fill="#f7f8ee" stroke="#d6deca" />
+        <rect x="40" y="27" width="114" height="106" rx="4" fill="#fffff8" stroke="#ccd7bf" />
+        <path d="M58 38v85M48 63h98M48 79h98M48 95h98M48 111h98" stroke="#e8eddd" />
+        <path d="M89 114h35M107 106V73" stroke="#6f895b" stroke-width="1.6" stroke-linecap="round" />
+        <path d="M107 91C88 91 82 79 83 63c18 0 25 12 24 28Z" fill="#d4e0bc" stroke="#859d6c" stroke-width="1.3" />
+        <path d="M107 75c-1-18 9-30 27-33 3 18-8 31-27 33Z" fill="#e1e9ce" stroke="#859d6c" stroke-width="1.3" />
+        <path d="m108 75 17-22m-18 38-16-18" stroke="#859d6c" stroke-width="1.2" stroke-linecap="round" />
+        <path d="m151 41 5-8m3 17 8-3M142 32l1-7" stroke="#c89966" stroke-width="1.4" stroke-linecap="round" />
+        <circle cx="31" cy="101" r="2" fill="#c89966" />
+        <path d="m25 49 4 1m-2-3v4" stroke="#c89966" stroke-linecap="round" />
+      </svg>
+    </template>
+    <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+    <noscript><p class="noscript-message">NoteSprout needs JavaScript to generate and practice quizzes. Your notes stay on this computer.</p></noscript>
+  </body>
+</html>
