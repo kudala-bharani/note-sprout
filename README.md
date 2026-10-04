@@ -64,7 +64,3 @@ The unit and HTTP tests use controlled model responses. They do not substitute f
 - [Qwen3](https://github.com/QwenLM/Qwen3) / [the 4B Ollama model](https://ollama.com/library/qwen3:4b): open-weight model, Apache-2.0. Model files are not included in this repository.
 - Original application code and sample study material were developed with **OpenAI Codex assistance**. Bharani supplied the project direction and intended recipient. Do not describe this as unaided work or as tested by the intended recipient until he has tried it.
 - The code is MIT-licensed; external runtime/model licenses remain separate.
-
-## Challenge status
-
-This is a local project, **not yet a submitted contest entry**. Before submission: invite the intended recipient to try it, review the implementation and write-up, provide an honest deployed/video demo and code link, confirm eligibility and rules, and disclose AI assistance on DEV. See [the draft](docs/DEV_DRAFT.md). The entry deadline is October 5, 2026 at 2:59 AM EDT. Any commits after the deadline must be identified here if the project is submitted.
